@@ -1,7 +1,11 @@
 package com.example.uysal.brain_alarm;
 
+import android.app.FragmentManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,6 +35,14 @@ public class SetAlarm extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, remTimes);
 
         wakeupList.setAdapter(arrayAdapter);
+
+        wakeupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogFragment newFragment = new Fragments();
+                newFragment.show(getSupportFragmentManager(), "Fragment");
+            }
+        });
 
     }
 
