@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -17,16 +18,25 @@ public class SetAlarm extends AppCompatActivity {
     private String clk = "";
     private int sleepHour;
     private int sleepMinute;
+    EditText sleepTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_alarm);
 
+        // Getting sleep time with shared preferences
         sleepHour = AlarmList.sharedPreferences.getInt("SleepTimeHour", 0);
         sleepMinute = AlarmList.sharedPreferences.getInt("SleepTimeMinute", 0);
         printTime();
+        // ---------------------------------------------------------
 
+        // Setting sleep time to EditText
+        sleepTime = findViewById(R.id.sleepTime2_txt);
+        sleepTime.setText(clk);
+        // ---------------------------------------------------------
+
+        // Setting sleep time to ListView
         wakeupList = findViewById(R.id.wakeup_alarms);
         ArrayList<String> remTimes = new ArrayList<>();
         remTimes.add(clk);
@@ -35,6 +45,7 @@ public class SetAlarm extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, remTimes);
 
         wakeupList.setAdapter(arrayAdapter);
+        // ---------------------------------------------------------
 
         wakeupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
