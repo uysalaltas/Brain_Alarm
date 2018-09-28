@@ -4,42 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AlarmList"
     tools:showIn="@layout/activity_alarm_list">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="128dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_light"
-        android:gravity="center_vertical"
-        android:text="Uyku Saatiniz: "
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/sleepTime1_txt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/sleepTime1_txt"
-        android:layout_width="102dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:fontFamily="@font/roboto_light"
-        android:inputType="textPersonName"
-        android:text="--:--"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/alarm_list"
@@ -51,5 +21,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
