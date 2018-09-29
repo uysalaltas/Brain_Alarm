@@ -24,12 +24,17 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_list);
+        sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
+
+        int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
+        if(sleepDelay == 0) {
+            Fragments fragments = new Fragments();
+            fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         clk = new Clock();
-
-        sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

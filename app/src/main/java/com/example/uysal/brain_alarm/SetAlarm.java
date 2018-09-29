@@ -1,14 +1,10 @@
 package com.example.uysal.brain_alarm;
 
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -59,8 +55,7 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
         wakeupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DialogFragment newFragment = new Fragments();
-                newFragment.show(getSupportFragmentManager(), "Fragment");
+
             }
         });
 
