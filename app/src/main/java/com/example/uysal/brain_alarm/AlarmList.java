@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
     Clock clk;
+    Fragments fragments;
     static SharedPreferences sharedPreferences;
 
     @Override
@@ -27,8 +28,9 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
 
         int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
+        System.out.println(sleepDelay);
         if(sleepDelay == 0) {
-            Fragments fragments = new Fragments();
+            fragments = new Fragments();
             fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,6 +69,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            fragments = new Fragments();
+            fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
+
+            int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
+            System.out.println(sleepDelay);
+
             return true;
         }
 
