@@ -1,5 +1,6 @@
 package com.example.uysal.brain_alarm;
 
+import android.app.AlarmManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,25 +13,60 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
+    // Definitions
+    // ---------------------------------------------------------
     Clock clk;
+    Fragments fragments;
     static SharedPreferences sharedPreferences;
+    ListView alarmList;
+    ArrayList<String> alarms;
+    // ---------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_list);
+
+        // Check sleepDelay. If it is empty show on fragment.
+        // ---------------------------------------------------------
+        sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
+        int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
+        System.out.println(sleepDelay);
+
+        if(sleepDelay == 0) {
+            fragments = new Fragments();
+            fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
+        }
+        // ---------------------------------------------------------
+
+        // Toolbar Operations
+        // ---------------------------------------------------------
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // ---------------------------------------------------------
 
         clk = new Clock();
 
-        sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
+        // List Operations
+        // ---------------------------------------------------------
+        alarmList = findViewById(R.id.alarm_list);
+        alarms = new ArrayList<>();
+        alarms.add("08:00");
 
+        AlarmAdapter alarmAdapter=new AlarmAdapter(alarms, this);
+        alarmList.setAdapter(alarmAdapter);
+        // ---------------------------------------------------------
+
+        // Floating Button Operations
+        // ---------------------------------------------------------
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +80,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
             }
         });
+        // ---------------------------------------------------------
+
     }
 
     @Override
@@ -62,6 +100,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            fragments = new Fragments();
+            fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
+
+            int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
+            System.out.println(sleepDelay);
+
             return true;
         }
 

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 
 public class ZoomedAlarmList extends AppCompatActivity {
@@ -15,9 +16,8 @@ public class ZoomedAlarmList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoomed_alarm_list);
-        listView = (ListView) findViewById(R.id.zoomedAlarmList);
 
-
+        listView = findViewById(R.id.zoomedAlarmList);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",0);
         ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
@@ -34,7 +34,6 @@ public class ZoomedAlarmList extends AppCompatActivity {
                 listView.setAdapter(arrayAdapter3);
                 break;
         }
-
         //Tests
         System.out.println("remTimes " + remTimes);
         System.out.println("remTimes2 "+ remTimes2);

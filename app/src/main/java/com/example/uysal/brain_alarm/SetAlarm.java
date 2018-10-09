@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +20,7 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
 
     Clock clock;
     ListView wakeupList;
+    private String clk1 = "";
     private int sleepHour;
     private int sleepMinute;
     EditText sleepTime;
@@ -39,20 +39,25 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
         // Getting sleep time from shared preferences
         sleepHour = sharedPreferences.getInt("SleepTimeHour", 0);
         sleepMinute = sharedPreferences.getInt("SleepTimeMinute", 0);
+        clk1 = generateTimeFormat(sleepHour, sleepMinute);
+        // ---------------------------------------------------------
+
+        // Rem activities added
+        remTimes = new ArrayList<String>();
+        remTimes2 = new ArrayList<String>();
+        remTimes3 = new ArrayList<String>();
         // ---------------------------------------------------------
 
         // Setting EditText with sleep time
         sleepTime = findViewById(R.id.sleepTime2_txt);
+        sleepTime.setText(clk1);
         sleepTime.setKeyListener(null);
         // ---------------------------------------------------------
-
-        remTimes = new ArrayList<String>();
-        remTimes2 = new ArrayList<String>();
-        remTimes3 = new ArrayList<String>();
 
         // Setting sleep time to ListView
         wakeupList = findViewById(R.id.wakeup_alarms);
 
+        // ---------------------------------------------------------
         calculateAlarms();
 
         wakeupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,9 +73,29 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
                 startActivity(intent);
             }
         });
+
     }
 
-    //Calculate possible alarm suggestion
+    // Update sleep time if necessary
+    public void editSleepTime(View view) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        clock.setTime(hourOfDay, minute, 0);
+        System.out.println(hourOfDay + ":" + minute);
+
+        sharedPreferences.edit().putInt("SleepTimeHour", clock.getHours()).apply();
+        sharedPreferences.edit().putInt("SleepTimeMinute", clock.getMinutes()).apply();
+
+        // Restart activity
+        finish();
+        startActivity(getIntent());
+    }
+    // ---------------------------------------------------------
+
     public void calculateAlarms(){
         ArrayList<String> remTimesGapMin = new ArrayList<String>();
         ArrayList<String> remTimesGapMax = new ArrayList<String>();
@@ -134,24 +159,4 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
         }
         return clk;
     }
-
-    // Update sleep time if necessary
-    public void editSleepTime(View view) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        clock.setTime(hourOfDay, minute, 0);
-        System.out.println(hourOfDay + ":" + minute);
-
-        sharedPreferences.edit().putInt("SleepTimeHour", clock.getHours()).apply();
-        sharedPreferences.edit().putInt("SleepTimeMinute", clock.getMinutes()).apply();
-
-        // Restart activity
-        finish();
-        startActivity(getIntent());
-    }
-    // ---------------------------------------------------------
 }
