@@ -1,8 +1,11 @@
 package com.example.uysal.brain_alarm;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,7 +23,7 @@ public class ZoomedAlarmList extends AppCompatActivity {
         listView = findViewById(R.id.zoomedAlarmList);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",0);
-        ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
+        final ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
         ArrayList<String> remTimes2 = intent.getStringArrayListExtra("list2");
         ArrayList<String> remTimes3 = intent.getStringArrayListExtra("list3");
         switch (position){
@@ -34,6 +37,22 @@ public class ZoomedAlarmList extends AppCompatActivity {
                 listView.setAdapter(arrayAdapter3);
                 break;
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int temp = listView.getPositionForView(view);
+                String tempS = (String) listView.getItemAtPosition(temp);
+
+//                Intent intent = new Intent(getApplicationContext(), AlarmList.class);
+//                intent.putExtra("Alarm", tempS);
+
+                Alarms.getAlarms().add(tempS);
+
+//                startActivity(intent);
+            }
+        });
+
         //Tests
         System.out.println("remTimes " + remTimes);
         System.out.println("remTimes2 "+ remTimes2);
