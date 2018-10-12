@@ -1,6 +1,5 @@
 package com.example.uysal.brain_alarm;
 
-import android.app.AlarmManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
@@ -39,7 +37,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         // ---------------------------------------------------------
         sharedPreferences = this.getSharedPreferences("com.example.uysal.brain_alarm", Context.MODE_PRIVATE);
         int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
-        System.out.println(sleepDelay);
 
         if(sleepDelay == 0) {
             fragments = new Fragments();
@@ -57,11 +54,14 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         // List Operations
         // ---------------------------------------------------------
-        alarmList = findViewById(R.id.alarm_list);
-        alarms = new ArrayList<>();
-        alarms.add("08:00");
+//        Intent intent = getIntent();
+//        String alarm = intent.getStringExtra("Alarm");
+//
+//        alarmList = findViewById(R.id.alarm_list);
+//        alarms = new ArrayList<>();
+//        alarms.add(alarm);
 
-        AlarmAdapter alarmAdapter=new AlarmAdapter(alarms, this);
+        AlarmAdapter alarmAdapter=new AlarmAdapter(Alarms.getAlarms(), this);
         alarmList.setAdapter(alarmAdapter);
         // ---------------------------------------------------------
 
