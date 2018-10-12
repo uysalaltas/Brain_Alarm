@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
-    // Definitions
+    // Definitionss
     // ---------------------------------------------------------
     Clock clk;
     Fragments fragments;
