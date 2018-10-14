@@ -27,6 +27,9 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".ZoomedAlarmList"></activity>
+
+        <receiver android:name=".AlarmReceiver"/>
+
     </application>
 
 </manifest>

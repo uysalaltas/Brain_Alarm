@@ -1,7 +1,6 @@
 package com.example.uysal.brain_alarm;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,7 @@ public class ZoomedAlarmList extends AppCompatActivity {
         listView = findViewById(R.id.zoomedAlarmList);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",0);
-        final ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
+        ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
         ArrayList<String> remTimes2 = intent.getStringArrayListExtra("list2");
         ArrayList<String> remTimes3 = intent.getStringArrayListExtra("list3");
         switch (position){
@@ -44,12 +43,12 @@ public class ZoomedAlarmList extends AppCompatActivity {
                 int temp = listView.getPositionForView(view);
                 String tempS = (String) listView.getItemAtPosition(temp);
 
-//                Intent intent = new Intent(getApplicationContext(), AlarmList.class);
+                Intent intent = new Intent(getApplicationContext(), AlarmList.class);
 //                intent.putExtra("Alarm", tempS);
 
                 Alarms.getAlarms().add(tempS);
 
-//                startActivity(intent);
+                startActivity(intent);
             }
         });
 
@@ -57,5 +56,17 @@ public class ZoomedAlarmList extends AppCompatActivity {
         System.out.println("remTimes " + remTimes);
         System.out.println("remTimes2 "+ remTimes2);
         System.out.println("remTimes3" + remTimes3);
+    }
+
+    public static int[] SplitToInt(String input){
+        String[] time = input.split("\\:");
+        int hour = Integer.valueOf(time[0]);
+        int minute =  Integer.valueOf(time[1]);
+
+        int [] merge = new int[2];
+        merge[0] = hour;
+        merge[1] = minute;
+
+        return merge;
     }
 }
