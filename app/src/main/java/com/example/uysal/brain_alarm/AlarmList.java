@@ -14,11 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
@@ -28,8 +30,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     Fragments fragments;
     static SharedPreferences sharedPreferences;
     ListView alarmList;
-    static PendingIntent alarmIntent;
-    static AlarmManager alarmMgr;
+    static Date d;
     // ---------------------------------------------------------
 
     @Override
@@ -58,16 +59,9 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         // List Operations
         // ---------------------------------------------------------
-//        Intent intent = getIntent();
-//        String alarm = intent.getStringExtra("Alarm");
-
         alarmList = findViewById(R.id.alarm_list);
         AlarmAdapter alarmAdapter = new AlarmAdapter(Alarms.getAlarms(), this);
         alarmList.setAdapter(alarmAdapter);
-        if (Alarms.getAlarms().isEmpty() == false) {
-            alarmSet(ZoomedAlarmList.SplitToInt(Alarms.getAlarms().get(0))[0],
-                    ZoomedAlarmList.SplitToInt(Alarms.getAlarms().get(0))[1], 0);
-        }
         // ---------------------------------------------------------
 
         // Floating Button Operations
@@ -120,7 +114,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         clk.setTime(hourOfDay, minute, 0);
-        System.out.println(hourOfDay + ":" + minute);
 
         sharedPreferences.edit().putInt("SleepTimeHour", clk.getHours()).apply();
         sharedPreferences.edit().putInt("SleepTimeMinute", clk.getMinutes()).apply();
@@ -129,27 +122,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         startActivity(intent);
     }
 
-    public void alarmSet(int hr, int mnt,int rqCode) {
-        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(this, rqCode, intent, 0);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, hr);
-        calendar.set(Calendar.MINUTE, mnt);
-
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
+    public void alarmClick(View view) {
+        System.out.println("Yes");
     }
 
-    public void alarmOff(int rqCode) {
-        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(this, rqCode, intent, 0);
-
-        if (alarmMgr!= null) {
-            alarmMgr.cancel(alarmIntent);
-        }
-    }
 }

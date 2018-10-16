@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.uysal.brain_alarm.AlarmList.sharedPreferences;
 
@@ -85,7 +86,6 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         clock.setTime(hourOfDay, minute, 0);
-        System.out.println(hourOfDay + ":" + minute);
 
         sharedPreferences.edit().putInt("SleepTimeHour", clock.getHours()).apply();
         sharedPreferences.edit().putInt("SleepTimeMinute", clock.getMinutes()).apply();
@@ -138,15 +138,10 @@ public class SetAlarm extends AppCompatActivity implements TimePickerDialog.OnTi
         arrayAdapterGap = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, remTimesGap);
         wakeupList.setAdapter(arrayAdapterGap);
 
-        //Test
-        System.out.println("Class:SetAlarm ArrayList:remTimes: " + remTimes);
-        System.out.println("Class:SetAlarm ArrayList:remTimes2 "+ remTimes2);
-        System.out.println("Class:SetAlarm ArrayList:remTimes3" + remTimes3);
     }
 
     //Generation of time format
-    public String generateTimeFormat (int hr, int min )
-    {
+    public String generateTimeFormat (int hr, int min ) {
         String clk="00:00";
         if (hr < 10){
             clk = "0" + String.valueOf(hr) + ":";

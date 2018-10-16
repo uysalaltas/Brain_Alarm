@@ -44,18 +44,11 @@ public class ZoomedAlarmList extends AppCompatActivity {
                 String tempS = (String) listView.getItemAtPosition(temp);
 
                 Intent intent = new Intent(getApplicationContext(), AlarmList.class);
-//                intent.putExtra("Alarm", tempS);
-
                 Alarms.getAlarms().add(tempS);
-
                 startActivity(intent);
             }
         });
 
-        //Tests
-        System.out.println("remTimes " + remTimes);
-        System.out.println("remTimes2 "+ remTimes2);
-        System.out.println("remTimes3" + remTimes3);
     }
 
     public static int[] SplitToInt(String input){

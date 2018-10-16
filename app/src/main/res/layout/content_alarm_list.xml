@@ -14,8 +14,8 @@
     <ListView
         android:id="@+id/alarm_list"
         android:layout_width="365dp"
-        android:layout_height="444dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="471dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

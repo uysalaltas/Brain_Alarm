@@ -17,10 +17,11 @@
 
         <TextView
             android:id="@+id/alarm"
-            android:layout_width="213dp"
-            android:layout_height="wrap_content"
+            android:layout_width="241dp"
+            android:layout_height="39dp"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
+            android:onClick="alarmClick"
             android:text="Alarm 1"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -30,9 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:fontFamily="@font/roboto"
             android:text="On / Off"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:checked="true" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 
