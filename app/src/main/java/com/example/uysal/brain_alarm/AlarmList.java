@@ -15,7 +15,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -31,6 +34,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     static SharedPreferences sharedPreferences;
     ListView alarmList;
     static Date d;
+    static FloatingActionButton fab;
+    static ImageButton deleteAlarm;
     // ---------------------------------------------------------
 
     @Override
@@ -62,11 +67,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         alarmList = findViewById(R.id.alarm_list);
         AlarmAdapter alarmAdapter = new AlarmAdapter(Alarms.getAlarms(), this);
         alarmList.setAdapter(alarmAdapter);
+        deleteAlarm = findViewById(R.id.deleteAlarm);
         // ---------------------------------------------------------
 
         // Floating Button Operations
         // ---------------------------------------------------------
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,10 +126,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         Intent intent = new Intent(getApplicationContext(), SetAlarm.class);
         startActivity(intent);
-    }
-
-    public void alarmClick(View view) {
-        System.out.println("Yes");
     }
 
 }

@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -63,13 +65,6 @@ public class AlarmAdapter extends BaseAdapter implements ListAdapter{
         //Handle buttons and add onClickListeners
         Switch switchOnOff = view.findViewById(R.id.switch1);
 
-        switchOnOff.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,6 +76,20 @@ public class AlarmAdapter extends BaseAdapter implements ListAdapter{
                     Toast.makeText(context.getApplicationContext(), "Alarm Off", Toast.LENGTH_SHORT).show();
                     alarmOff(position);
                 }
+            }
+        });
+
+        final CheckBox checkAlarm = view.findViewById(R.id.checkAlarm);
+        TextView Alarm = view.findViewById(R.id.alarm);
+
+        Alarm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                checkAlarm.setVisibility(v.VISIBLE);
+                AlarmList.deleteAlarm.setVisibility(v.VISIBLE);
+                AlarmList.fab.setVisibility(v.INVISIBLE);
+
+                return false;
             }
         });
 
@@ -113,8 +122,7 @@ public class AlarmAdapter extends BaseAdapter implements ListAdapter{
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmMgr.cancel(alarmIntent);
-
-
+        //alarmIntent.cancel();
     }
 
 }
