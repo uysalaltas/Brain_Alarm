@@ -1,18 +1,24 @@
 package com.example.uysal.brain_alarm;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.uysal.brain_alarm.data.AlarmContract;
 
 import java.util.ArrayList;
 
 public class ZoomedAlarmList extends AppCompatActivity {
     ListView listView;
     int position;
+    String tempS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,25 +47,28 @@ public class ZoomedAlarmList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int temp = listView.getPositionForView(view);
-                String tempS = (String) listView.getItemAtPosition(temp);
+                tempS = (String) listView.getItemAtPosition(temp);
 
                 Intent intent = new Intent(getApplicationContext(), AlarmList.class);
-                Alarms.getAlarms().add(tempS);
                 startActivity(intent);
+                instertAlarm();
             }
         });
 
     }
 
-    public static int[] SplitToInt(String input){
-        String[] time = input.split("\\:");
-        int hour = Integer.valueOf(time[0]);
-        int minute =  Integer.valueOf(time[1]);
-
-        int [] merge = new int[2];
-        merge[0] = hour;
-        merge[1] = minute;
-
-        return merge;
+    private void instertAlarm(){
+        String alarmString = tempS;
+        ContentValues values = new ContentValues();
+        values.put(AlarmContract.AlarmEntry.COLUMN_ALARM, alarmString);
+        Uri newUri = getContentResolver().insert(AlarmContract.AlarmEntry.CONTENT_URI, values);
+        // Show a toast message depending on whether or not the insertion was successful
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(getApplicationContext(), "Bad", Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(getApplicationContext(), "Nice", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -30,10 +30,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".ZoomedAlarmList" />
-
         <receiver android:name=".AlarmReceiver" />
-
         <activity android:name=".WakeUpFrame"></activity>
+
+        <provider
+            android:authorities="com.example.uysal.brain_alarm.data"
+            android:name=".data.AlarmProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
