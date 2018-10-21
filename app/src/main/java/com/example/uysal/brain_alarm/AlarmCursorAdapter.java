@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.example.uysal.brain_alarm.data.AlarmContract;
+import com.example.uysal.brain_alarm.AlarmList;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +33,7 @@ public class AlarmCursorAdapter extends CursorAdapter {
 
     /**
      * Makes a new blank list item view. No data is set (or bound) to the views yet.
-     *
+     *1
      * @param context app context
      * @param cursor  The cursor from which to get the data. The cursor is already
      *                moved to the correct position.

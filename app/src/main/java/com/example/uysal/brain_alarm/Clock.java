@@ -6,6 +6,7 @@ public class Clock {
     private int hr; //store hours
     private int min;  //store minutes
     private int sec; //store seconds
+    private int day;
     private String clk = "";
     public Clock ()
     {
@@ -91,13 +92,17 @@ public class Clock {
         hr = hr + shr;
 
         if (hr > 23)
+        {
             hr = hr - 24;
+        }
     }
+
     public boolean equals (Clock otherClock)
     {
         return (hr == otherClock.hr
                 && min == otherClock.min
                 && sec == otherClock.sec);
     }
+
 
 }
