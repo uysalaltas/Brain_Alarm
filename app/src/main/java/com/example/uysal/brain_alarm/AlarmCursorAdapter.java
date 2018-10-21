@@ -8,12 +8,12 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.example.uysal.brain_alarm.data.AlarmContract;
 
@@ -65,11 +65,12 @@ public class AlarmCursorAdapter extends CursorAdapter {
         // Read the alarm attributes from the Cursor for the current alarm
         final String alarmString = cursor.getString(nameColumnIndex);
         alarmTextView.setText(alarmString);
-        System.out.println(SplitToInt(alarmString)[0]);
 
+        alarmTextView.setFocusable(false);
         alarmSet(SplitToInt(alarmString)[0], SplitToInt(alarmString)[1], cursor.getPosition());
 
         Switch switchOnOff = view.findViewById(R.id.switch1);
+        switchOnOff.setFocusable(false);
         switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -83,18 +84,6 @@ public class AlarmCursorAdapter extends CursorAdapter {
             }
         });
 
-        final CheckBox checkAlarm = view.findViewById(R.id.checkAlarm);
-
-        alarmTextView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                checkAlarm.setVisibility(v.VISIBLE);
-                AlarmList.deleteAlarm.setVisibility(v.VISIBLE);
-                AlarmList.fab.setVisibility(v.INVISIBLE);
-
-                return false;
-            }
-        });
     }
 
     public void alarmSet(int hr, int mnt, int rqCode) {

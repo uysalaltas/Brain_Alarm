@@ -1,12 +1,12 @@
 package com.example.uysal.brain_alarm;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,18 +21,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.uysal.brain_alarm.data.AlarmContract;
 import com.example.uysal.brain_alarm.data.AlarmsDbHelper;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,
@@ -45,10 +43,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     Clock clk;
     Fragments fragments;
     static SharedPreferences sharedPreferences;
-    ListView alarmList;
     static Date d;
     static FloatingActionButton fab;
-    static ImageButton deleteAlarm;
     AlarmsDbHelper mDbHelper;
     // ---------------------------------------------------------
 
@@ -78,12 +74,67 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         // List Operations
         // ---------------------------------------------------------
-        alarmList = findViewById(R.id.alarm_list);
-        deleteAlarm = findViewById(R.id.deleteAlarm);
+        SwipeMenuListView swipeListView = findViewById(R.id.swipe);
         getSupportLoaderManager().initLoader(ALARM_LOADER, null, this);
         alarmCursorAdapter = new AlarmCursorAdapter(this, null);
-        alarmList.setAdapter(alarmCursorAdapter);
+        swipeListView.setAdapter(alarmCursorAdapter);
+
         // ---------------------------------------------------------
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                openItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x66,
+                        0xff)));
+                // set item width
+                openItem.setWidth(170);
+                // set item title
+                openItem.setTitle("Open");
+                // set item title fontsize
+                openItem.setTitleSize(18);
+                // set item title font color
+                openItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(openItem);
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(170);
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_delete);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+
+        swipeListView.setMenuCreator(creator);
+
+        swipeListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        // open
+                        break;
+                    case 1:
+                        // delete
+                        break;
+                }
+                return false;
+            }
+        });
+
+        swipeListView.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         // Floating Button Operations
         // ---------------------------------------------------------
@@ -136,6 +187,9 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             System.out.println(sleepDelay);
 
             return true;
+        } else if(id == R.id.action_settings2){
+            deleteAllAlarms();
+            Toast.makeText(getApplicationContext(), "Alarms Deleted", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

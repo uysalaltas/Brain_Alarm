@@ -18,13 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <CheckBox
-            android:id="@+id/checkAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="    "
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/alarm"
             android:layout_width="144dp"
