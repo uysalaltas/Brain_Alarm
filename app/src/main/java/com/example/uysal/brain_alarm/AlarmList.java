@@ -1,14 +1,12 @@
 package com.example.uysal.brain_alarm;
 
 import android.app.TimePickerDialog;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,7 +21,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -33,7 +30,6 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.uysal.brain_alarm.data.AlarmContract;
 import com.example.uysal.brain_alarm.data.AlarmsDbHelper;
-import com.example.uysal.brain_alarm.AlarmCursorAdapter;
 
 import java.util.Date;
 
@@ -78,7 +74,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         // List Operations
         // ---------------------------------------------------------
-        final SwipeMenuListView swipeListView = findViewById(R.id.swipe);
+        SwipeMenuListView swipeListView = findViewById(R.id.swipe);
         getSupportLoaderManager().initLoader(ALARM_LOADER, null, this);
         alarmCursorAdapter = new AlarmCursorAdapter(this, null);
         swipeListView.setAdapter(alarmCursorAdapter);
@@ -131,7 +127,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
                         // open
                         break;
                     case 1:
-                        deleteSelectedAlarm(swipeListView.getItemIdAtPosition(position),position);
+                        // delete
                         break;
                 }
                 return false;
@@ -241,25 +237,5 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
                 null,
                 null);
         Log.v("CatalogActivity", rowsDeleted + " rows deleted from pet database");
-    }
-
-    private void deleteSelectedAlarm(long id, int rq){
-
-        Uri selectedAlarm = ContentUris.withAppendedId(AlarmContract.AlarmEntry.CONTENT_URI, id);
-
-        int rowsDeleted = getContentResolver().delete(selectedAlarm, null, null);
-
-        // Show a toast message depending on whether or not the delete was successful.
-        if (rowsDeleted == 0) {
-            // If no rows were deleted, then there was an error with the delete.
-            Toast.makeText(this, "Bad",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            // Otherwise, the delete was successful and we can display a toast.
-            Toast.makeText(this, "Nice",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        alarmCursorAdapter.alarmOff(rq);
     }
 }
