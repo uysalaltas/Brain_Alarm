@@ -2,6 +2,7 @@ package com.example.uysal.brain_alarm;
 
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +33,6 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.uysal.brain_alarm.data.AlarmContract;
 import com.example.uysal.brain_alarm.data.AlarmsDbHelper;
-
 import java.util.Date;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,
@@ -48,6 +48,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     static Date d;
     static FloatingActionButton fab;
     AlarmsDbHelper mDbHelper;
+    static SwipeMenuListView swipeListView;
     // ---------------------------------------------------------
 
     @Override
@@ -76,11 +77,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         // List Operations
         // ---------------------------------------------------------
-        final SwipeMenuListView swipeListView = findViewById(R.id.swipe);
+        swipeListView = findViewById(R.id.swipe);
+
         getSupportLoaderManager().initLoader(ALARM_LOADER, null, this);
+
         alarmCursorAdapter = new AlarmCursorAdapter(this, null);
         swipeListView.setAdapter(alarmCursorAdapter);
-
         // ---------------------------------------------------------
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -118,7 +120,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             }
         };
 
-
         swipeListView.setMenuCreator(creator);
 
         swipeListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
@@ -126,7 +127,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        // open
                         break;
                     case 1:
                         deleteSelectedAlarm(swipeListView.getItemIdAtPosition(position),position);
@@ -146,23 +146,16 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             public void onClick(View view) {
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getSupportFragmentManager(), "timePicker");
-
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Lütfen uyuma saatinizi giriniz.", Toast.LENGTH_LONG);
                 toast.show();
-
             }
         });
         // ---------------------------------------------------------
 
         //DATABASE
         // ---------------------------------------------------------
-
-        /* To access our database, we instantiate our subclass of SQLiteOpenHelper
-         and pass the context, which is the current activity. */
-
         mDbHelper = new AlarmsDbHelper(this);
-
         // ---------------------------------------------------------
     }
 
@@ -184,16 +177,13 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         if (id == R.id.action_settings) {
             fragments = new Fragments();
             fragments.show(getSupportFragmentManager(), "Uyuma Süresi");
-
             int sleepDelay = sharedPreferences.getInt("SleepDelay", 0);
             System.out.println(sleepDelay);
-
             return true;
         } else if(id == R.id.action_settings2){
             deleteAllAlarms();
             Toast.makeText(getApplicationContext(), "Alarms Deleted", Toast.LENGTH_SHORT).show();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -214,7 +204,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         String[] projection = {
                 AlarmContract.AlarmEntry.TABLE_NAME,
                 AlarmContract.AlarmEntry._ID,
-                AlarmContract.AlarmEntry.COLUMN_ALARM
+                AlarmContract.AlarmEntry.COLUMN_ALARM,
+                AlarmContract.AlarmEntry.COLUMN_STATUS
         };
         return new CursorLoader(this,
                 AlarmContract.AlarmEntry.CONTENT_URI,
@@ -257,7 +248,31 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             Toast.makeText(this, "Nice",
                     Toast.LENGTH_SHORT).show();
         }
-
         alarmCursorAdapter.alarmOff(rq);
+    }
+
+    public static void statusHandle(Context c, int status, long id){
+
+        ContentValues values = new ContentValues();
+        values.put(AlarmContract.AlarmEntry.COLUMN_STATUS, status);
+
+        Uri selectedAlarm = ContentUris.withAppendedId(AlarmContract.AlarmEntry.CONTENT_URI, id);
+        System.out.println("selectedAlarm uri from alarmlist.java" + selectedAlarm);
+        if(selectedAlarm == null){
+
+        } else {
+            int rowsAffected = c.getContentResolver().update(selectedAlarm, values, null, null);
+
+            // Show a toast message depending on whether or not the update was successful.
+            if (rowsAffected == 0) {
+                // If no rows were affected, then there was an error with the update.
+                Toast.makeText(c, "Bad",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the update was successful and we can display a toast.
+                Toast.makeText(c, "Nice",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

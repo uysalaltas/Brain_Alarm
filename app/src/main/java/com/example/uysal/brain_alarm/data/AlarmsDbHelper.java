@@ -39,7 +39,8 @@ public class AlarmsDbHelper extends SQLiteOpenHelper {
 
         String SQL_CREATE_ALARMS_TABLE = "CREATE TABLE " + AlarmContract.AlarmEntry.TABLE_NAME
                 + " (" + AlarmContract.AlarmEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + AlarmContract.AlarmEntry.COLUMN_ALARM + " TEXT NOT NULL " + ");";
+                + AlarmContract.AlarmEntry.COLUMN_ALARM + " TEXT NOT NULL, "
+                + AlarmContract.AlarmEntry.COLUMN_STATUS + " INTEGER NOT NULL DEFAULT 1);";
 
         db.execSQL(SQL_CREATE_ALARMS_TABLE);
 
