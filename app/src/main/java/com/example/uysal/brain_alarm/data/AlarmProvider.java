@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.uysal.brain_alarm.AlarmList;
+
 import static com.example.uysal.brain_alarm.data.AlarmContract.CONTENT_AUTHORITY;
 import static com.example.uysal.brain_alarm.data.AlarmContract.PATH_ALARMS;
 
@@ -172,6 +174,10 @@ public class AlarmProvider extends ContentProvider {
         switch (match){
             case ALARMS:
                 return updateAlarm(uri, values, selection, selectionArgs);
+            case ALARM_ID:
+                selection = AlarmContract.AlarmEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateAlarm(uri, values, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for "+ uri);
 
@@ -196,14 +202,14 @@ public class AlarmProvider extends ContentProvider {
         // Otherwise, get writeable database to update the data
         SQLiteDatabase database = alarmsDbHelper.getWritableDatabase();
 
-        // Perform the update on the database and get the number of rows affected
-        int rowsUpdated = database.update(AlarmContract.AlarmEntry.TABLE_NAME, values, selection, selectionArgs);
-        // If 1 or more rows were updated, then notify all listeners that the data at the
-        // given URI has changed
-        if (rowsUpdated != 0) {
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
-        // Return the number of rows updated
-        return rowsUpdated;
+//        // Perform the update on the database and get the number of rows affected
+//        int rowsUpdated = database.update(AlarmContract.AlarmEntry.TABLE_NAME, values, selection, selectionArgs);
+//        // If 1 or more rows were updated, then notify all listeners that the data at the
+//        // given URI has changed
+//        if (rowsUpdated != 0) {
+//            getContext().getContentResolver().notifyChange(uri, null);
+//        }
+//        // Return the number of rows updated
+        return database.update(AlarmContract.AlarmEntry.TABLE_NAME, values, selection, selectionArgs);
     }
 }

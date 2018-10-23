@@ -65,5 +65,7 @@ public final class AlarmContract{
          * Type: TEXT
          */
         public final static String COLUMN_ALARM ="alarms";
+
+        public final static String COLUMN_STATUS = "status";
     }
 }

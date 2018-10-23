@@ -57,10 +57,11 @@ public class ZoomedAlarmList extends AppCompatActivity {
 
     }
 
-    private void instertAlarm(){
+    public void instertAlarm(){
         String alarmString = tempS;
         ContentValues values = new ContentValues();
         values.put(AlarmContract.AlarmEntry.COLUMN_ALARM, alarmString);
+        values.put(AlarmContract.AlarmEntry.COLUMN_STATUS, 1);
         Uri newUri = getContentResolver().insert(AlarmContract.AlarmEntry.CONTENT_URI, values);
         // Show a toast message depending on whether or not the insertion was successful
         if (newUri == null) {
