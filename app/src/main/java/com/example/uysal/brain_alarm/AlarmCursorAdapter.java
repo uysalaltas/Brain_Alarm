@@ -2,17 +2,11 @@ package com.example.uysal.brain_alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +18,14 @@ import android.widget.Toast;
 
 import com.example.uysal.brain_alarm.data.AlarmContract;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+
+import es.dmoral.toasty.Toasty;
 
 import static com.example.uysal.brain_alarm.AlarmList.swipeListView;
 
 public class AlarmCursorAdapter extends CursorAdapter{
 
-    private ArrayList<String> list;
     Context ctx;
     int a = 1;
 
@@ -80,7 +74,7 @@ public class AlarmCursorAdapter extends CursorAdapter{
 
         this.ctx = context;
         // Find individual views that we want to modify in the list item layout
-        TextView alarmTextView = (TextView) view.findViewById(R.id.alarm);
+        TextView alarmTextView = view.findViewById(R.id.alarm);
         // Find the columns of alarm attributes that we're interested in
         final int nameColumnIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_ALARM);
         final int statusColumnIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_STATUS);
@@ -105,11 +99,13 @@ public class AlarmCursorAdapter extends CursorAdapter{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    Toast.makeText(context.getApplicationContext(), "Alarm On", Toast.LENGTH_SHORT).show();
+                    Toasty.custom(ctx, "Alarm Is On", R.mipmap.ic_alarmon, Color.BLACK,
+                            Toast.LENGTH_SHORT, true, true).show();
                     alarmSet(SplitToInt(alarmString)[0], SplitToInt(alarmString)[1], pos);
                     AlarmList.statusHandle(ctx, 1, swipeListView.getItemIdAtPosition(pos));
                 } else {
-                    Toast.makeText(context.getApplicationContext(), "Alarm Off", Toast.LENGTH_SHORT).show();
+                    Toasty.custom(ctx, "Alarm Is Off", R.mipmap.ic_alarmoff,
+                            Color.BLACK, Toast.LENGTH_SHORT, true, true).show();
                     alarmOff(pos);
                     AlarmList.statusHandle(ctx, 0, swipeListView.getItemIdAtPosition(pos));
                 }
@@ -117,7 +113,6 @@ public class AlarmCursorAdapter extends CursorAdapter{
         });
 
     }
-
 
     public void alarmSet(int hr, int mnt, int rqCode) {
         AlarmManager alarmMgr = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);

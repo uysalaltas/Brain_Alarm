@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="350dp"
-        android:layout_height="37dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
@@ -22,12 +22,13 @@
             android:id="@+id/alarm"
             android:layout_width="144dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center|left"
             android:text="Alarm 1"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textColor="@android:color/background_light"
+            android:textSize="24dp"/>
 
         <Switch
             android:id="@+id/switch1"
@@ -37,7 +38,8 @@
             android:checked="true"
             android:fontFamily="@font/roboto"
             android:text="On / Off"
-            android:textSize="18sp"
+            android:textColor="@android:color/background_light"
+            android:textSize="24dp"
             tools:checked="true" />
 
     </LinearLayout>

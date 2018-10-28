@@ -35,6 +35,8 @@ import com.example.uysal.brain_alarm.data.AlarmContract;
 import com.example.uysal.brain_alarm.data.AlarmsDbHelper;
 import java.util.Date;
 
+import es.dmoral.toasty.Toasty;
+
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,
         LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -88,26 +90,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0x66,
-                        0xff)));
-                // set item width
-                openItem.setWidth(170);
-                // set item title
-                openItem.setTitle("Open");
-                // set item title fontsize
-                openItem.setTitleSize(18);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(openItem);
-
                 // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 // set item background
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
@@ -127,8 +111,6 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        break;
-                    case 1:
                         deleteSelectedAlarm(swipeListView.getItemIdAtPosition(position),position);
                         break;
                 }
@@ -146,9 +128,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             public void onClick(View view) {
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getSupportFragmentManager(), "timePicker");
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Lütfen uyuma saatinizi giriniz.", Toast.LENGTH_LONG);
-                toast.show();
+                Toasty.info(AlarmList.this, "Please set your sleep time",
+                        Toast.LENGTH_SHORT, true).show();
             }
         });
         // ---------------------------------------------------------
@@ -182,7 +163,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             return true;
         } else if(id == R.id.action_settings2){
             deleteAllAlarms();
-            Toast.makeText(getApplicationContext(), "Alarms Deleted", Toast.LENGTH_SHORT).show();
+            Toasty.warning(AlarmList.this, "All Alarms Deleted", Toast.LENGTH_SHORT,
+                    true).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -241,12 +223,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         // Show a toast message depending on whether or not the delete was successful.
         if (rowsDeleted == 0) {
             // If no rows were deleted, then there was an error with the delete.
-            Toast.makeText(this, "Bad",
-                    Toast.LENGTH_SHORT).show();
+            Toasty.error(AlarmList.this, "Error Occurred", Toast.LENGTH_SHORT,
+                    true).show();
         } else {
             // Otherwise, the delete was successful and we can display a toast.
-            Toast.makeText(this, "Nice",
-                    Toast.LENGTH_SHORT).show();
+            Toasty.success(AlarmList.this, "Success!",
+                    Toast.LENGTH_SHORT, true).show();
         }
         alarmCursorAdapter.alarmOff(rq);
     }
@@ -266,12 +248,10 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(c, "Bad",
-                        Toast.LENGTH_SHORT).show();
+                Toasty.error(c, "Error Occurred", Toast.LENGTH_SHORT,
+                        true).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(c, "Nice",
-                        Toast.LENGTH_SHORT).show();
             }
         }
     }
