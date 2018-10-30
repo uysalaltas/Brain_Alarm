@@ -8,13 +8,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/ListBackround"
         android:weightSum="1"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,24 +19,25 @@
             android:id="@+id/alarm"
             android:layout_width="144dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/roboto_light"
             android:gravity="center|left"
-            android:text="Alarm 1"
+            android:text="03:21"
             android:textColor="@android:color/background_light"
-            android:textSize="24dp"/>
+            android:textSize="40dp" />
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginRight="8dp"
             android:checked="true"
-            android:fontFamily="@font/roboto"
-            android:text="On / Off"
+            android:fontFamily="@font/roboto_light"
+            android:text="On/Off "
             android:textColor="@android:color/background_light"
-            android:textSize="24dp"
+            android:textSize="25dp"
             tools:checked="true" />
 
     </LinearLayout>

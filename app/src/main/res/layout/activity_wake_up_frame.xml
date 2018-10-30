@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/NightBackround"
     tools:context=".WakeUpFrame"
     tools:layout_editor_absoluteY="81dp">
 
@@ -11,12 +12,31 @@
         android:id="@+id/closeAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="193dp"
         android:onClick="closeAlarm"
         android:text="Close Alarm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintTop_toBottomOf="@+id/timeText"
+        app:layout_constraintVertical_bias="0.583" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="263dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="83dp"
+        android:fontFamily="@font/roboto_light"
+        android:gravity="center"
+        android:text="TIME"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/closeAlarm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

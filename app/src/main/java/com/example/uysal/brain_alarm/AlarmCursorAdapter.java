@@ -74,7 +74,7 @@ public class AlarmCursorAdapter extends CursorAdapter{
 
         this.ctx = context;
         // Find individual views that we want to modify in the list item layout
-        TextView alarmTextView = view.findViewById(R.id.alarm);
+        final TextView alarmTextView = view.findViewById(R.id.alarm);
         // Find the columns of alarm attributes that we're interested in
         final int nameColumnIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_ALARM);
         final int statusColumnIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_STATUS);
@@ -87,23 +87,31 @@ public class AlarmCursorAdapter extends CursorAdapter{
         alarmTextView.setFocusable(false);
         alarmSet(SplitToInt(alarmString)[0], SplitToInt(alarmString)[1], cursor.getPosition());
 
-        Switch switchOnOff = view.findViewById(R.id.switch1);
+        final Switch switchOnOff = view.findViewById(R.id.switch1);
         switchOnOff.setFocusable(false);
         final AlarmList al = new AlarmList();
         if(status == 1){
             switchOnOff.setChecked(true);
         }else {
+            alarmTextView.setTextColor(ctx.getColor(R.color.AlarmOffColor));
+            switchOnOff.setTextColor(ctx.getColor(R.color.AlarmOffColor));
             switchOnOff.setChecked(false);
         }
         switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    alarmTextView.setTextColor(Color.WHITE);
+                    switchOnOff.setTextColor(Color.WHITE);
+
                     Toasty.custom(ctx, "Alarm Is On", R.mipmap.ic_alarmon, Color.BLACK,
                             Toast.LENGTH_SHORT, true, true).show();
                     alarmSet(SplitToInt(alarmString)[0], SplitToInt(alarmString)[1], pos);
                     AlarmList.statusHandle(ctx, 1, swipeListView.getItemIdAtPosition(pos));
                 } else {
+                    alarmTextView.setTextColor(ctx.getColor(R.color.AlarmOffColor));
+                    switchOnOff.setTextColor(ctx.getColor(R.color.AlarmOffColor));
+
                     Toasty.custom(ctx, "Alarm Is Off", R.mipmap.ic_alarmoff,
                             Color.BLACK, Toast.LENGTH_SHORT, true, true).show();
                     alarmOff(pos);
@@ -130,7 +138,7 @@ public class AlarmCursorAdapter extends CursorAdapter{
             calendar.add(Calendar.DATE, 1);
         }
 
-        alarmMgr.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
+        alarmMgr.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),alarmIntent);
     }
 
     public void alarmOff(int rqCode) {

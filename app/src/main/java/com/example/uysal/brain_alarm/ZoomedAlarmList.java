@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.uysal.brain_alarm.data.AlarmContract;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,16 +34,29 @@ public class ZoomedAlarmList extends AppCompatActivity {
         ArrayList<String> remTimes = intent.getStringArrayListExtra("list");
         ArrayList<String> remTimes2 = intent.getStringArrayListExtra("list2");
         ArrayList<String> remTimes3 = intent.getStringArrayListExtra("list3");
+        ArrayList<String> remTimes4 = intent.getStringArrayListExtra("list4");
+        ArrayList<String> remTimes5 = intent.getStringArrayListExtra("list5");
+        ArrayList<String> remTimes6 = intent.getStringArrayListExtra("list6");
+        ArrayList<String> remTimes7 = intent.getStringArrayListExtra("list7");
+        ArrayList<String> remTimes8 = intent.getStringArrayListExtra("list8");
+        ArrayList<String> remTimes9 = intent.getStringArrayListExtra("list9");
 
-
-        final ShaderSeekArc seekArc = (ShaderSeekArc) findViewById(R.id.seek_arc);
+        final ShaderSeekArc seekArc = findViewById(R.id.seek_arc);
         textView = findViewById(R.id.textView);
         seekArc.setShowMark(false);
         seekArc.setShowProgress(false);
+        seekArc.setStartColor(0xFF1a237e);
+        seekArc.setEndColor(0xFF1a237e);
 
         final HashMap<Integer, String> hashMap1 = new HashMap<Integer, String>();
         final HashMap<Integer, String> hashMap2 = new HashMap<Integer, String>();
         final HashMap<Integer, String> hashMap3 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap4 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap5 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap6 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap7 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap8 = new HashMap<Integer, String>();
+        final HashMap<Integer, String> hashMap9 = new HashMap<Integer, String>();
 
         if(remTimes != null){
             for (int i = 0; i < remTimes.size(); i++){
@@ -111,6 +125,168 @@ public class ZoomedAlarmList extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
                     textView.setText(hashMap3.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes4 != null){
+            for (int i = 0; i < remTimes4.size(); i++){
+                hashMap4.put(i,remTimes4.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes4.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes4.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap4.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes5 != null){
+            for (int i = 0; i < remTimes5.size(); i++){
+                hashMap5.put(i,remTimes5.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes5.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes5.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap5.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes6 != null){
+            for (int i = 0; i < remTimes6.size(); i++){
+                hashMap6.put(i,remTimes6.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes6.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes6.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap6.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes7 != null){
+            for (int i = 0; i < remTimes7.size(); i++){
+                hashMap7.put(i,remTimes7.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes7.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes7.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap7.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes8 != null){
+            for (int i = 0; i < remTimes8.size(); i++){
+                hashMap8.put(i,remTimes8.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes8.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes8.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap8.get((int) v));
+                }
+
+                @Override
+                public void onStartTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(ShaderSeekArc shaderSeekArc) {
+
+                }
+            });
+        }
+
+        if(remTimes9 != null){
+            for (int i = 0; i < remTimes9.size(); i++){
+                hashMap9.put(i,remTimes9.get(i));
+            }
+            seekArc.setStartValue(0);
+            seekArc.setEndValue(remTimes9.size());
+            seekArc.setProgress(0);
+            textView.setText(remTimes9.get(0));
+
+            seekArc.setOnSeekArcChangeListener(new ShaderSeekArc.OnSeekArcChangeListener() {
+                @Override
+                public void onProgressChanged(ShaderSeekArc shaderSeekArc, float v) {
+                    textView.setText(hashMap9.get((int) v));
                 }
 
                 @Override

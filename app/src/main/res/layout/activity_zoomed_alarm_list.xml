@@ -4,18 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/NightBackround"
     tools:context=".ZoomedAlarmList">
-
-    <!--<ListView-->
-    <!--android:id="@+id/zoomedAlarmList"-->
-    <!--android:layout_width="368dp"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <me.rorschach.library.ShaderSeekArc
         android:id="@+id/seek_arc"
@@ -32,6 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:markSize="120"
         app:startAngle="-180"
+        app:lineColor="0xFF000000"
+        app:markColor="0xFF424242"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -44,6 +36,7 @@
         android:fontFamily="@font/roboto_light"
         android:text="00:00"
         android:textAlignment="center"
+        android:textColor="@android:color/background_light"
         android:textSize="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
