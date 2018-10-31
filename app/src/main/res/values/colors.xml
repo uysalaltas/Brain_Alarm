@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000033</color>
+    <color name="colorPrimary">#1a237e</color>
     <color name="colorPrimaryDark">#000033</color>
-    <color name="colorAccent">#0099FF</color>
-    <color name="NightBackround">#000066</color>
+    <color name="colorAccent">#4853c1</color>
+    <color name="NightBackround">#212121</color>
+    <color name="FABBackround">#1a237e</color>
+    <color name="ListBackround">#71424242</color>
+    <color name="ButtonBackround">#ad003780</color>
+    <color name="AlarmOffColor">#616161</color>
+    <color name="SwipeColor">#c62828</color>
 </resources>

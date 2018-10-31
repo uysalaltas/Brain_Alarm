@@ -30,6 +30,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@mipmap/ic_alarmadd"
-        app:backgroundTint="#0505d1"/>
+        app:backgroundTint="@color/FABBackround"/>
 
 </android.support.design.widget.CoordinatorLayout>

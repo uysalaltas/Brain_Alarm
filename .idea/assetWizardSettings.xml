@@ -36,8 +36,13 @@
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
+<<<<<<< HEAD
                                       <entry key="imageAsset" value="C:\Users\uysal\Documents\Android Icons\Alarm Off\baseline_alarm_off_black_48dp.png" />
                                       <entry key="outputName" value="ic_alarmoff" />
+=======
+                                      <entry key="imageAsset" value="C:\Users\chtak\Desktop\2x\baseline_clear_white_48dp.png" />
+                                      <entry key="outputName" value="ic_clear" />
+>>>>>>> 96c4fcbf2919a504eca8120f2a5243fa3b64e9d7
                                     </map>
                                   </option>
                                 </PersistentState>

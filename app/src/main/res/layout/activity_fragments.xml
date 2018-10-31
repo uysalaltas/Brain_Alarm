@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/NightBackround"
     tools:context=".Fragments">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="302dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_light"
-        android:text="Tahmini Uykuya Dalma Süreniz"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:text="Estimated falling asleep time"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Onayla"
+        android:text="OK"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_light"
+        android:background="#616161"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -44,28 +49,40 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" 0 - 10 Dakika" />
+            android:textColor="@android:color/background_light"
+            android:text=" 0 - 10 Min"
+            android:buttonTint="@android:color/white"
+            android:textSize="18dp"/>
 
         <RadioButton
             android:id="@+id/b"
+            android:textColor="@android:color/background_light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="10 - 20 Dakika" />
+            android:text="10 - 20 Min"
+            android:buttonTint="@android:color/white"
+            android:textSize="18dp"/>
 
         <RadioButton
             android:id="@+id/c"
+            android:textColor="@android:color/background_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="20 - 30 Dakika" />
+            android:text="20 - 30 Min"
+            android:buttonTint="@android:color/white"
+            android:textSize="18dp"/>
 
         <RadioButton
             android:id="@+id/d"
+            android:textColor="@android:color/background_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="30 - 60 Dakika" />
+            android:text="30 - 60 Min"
+            android:buttonTint="@android:color/white"
+            android:textSize="18dp"/>
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

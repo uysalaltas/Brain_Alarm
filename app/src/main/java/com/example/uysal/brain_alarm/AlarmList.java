@@ -93,8 +93,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
+                deleteItem.setBackground(new ColorDrawable(getColor(R.color.SwipeColor)));
                 // set item width
                 deleteItem.setWidth(170);
                 // set a icon
@@ -127,6 +126,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             @Override
             public void onClick(View view) {
                 DialogFragment newFragment = new TimePickerFragment();
+
                 newFragment.show(getSupportFragmentManager(), "timePicker");
                 Toasty.info(AlarmList.this, "Please set your sleep time",
                         Toast.LENGTH_SHORT, true).show();
