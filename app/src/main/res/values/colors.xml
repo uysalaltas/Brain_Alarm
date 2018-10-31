@@ -6,6 +6,7 @@
     <color name="NightBackround">#212121</color>
     <color name="FABBackround">#1a237e</color>
     <color name="ListBackround">#71424242</color>
+    <color name="ButtonBackround">#ad003780</color>
     <color name="AlarmOffColor">#616161</color>
     <color name="SwipeColor">#c62828</color>
 </resources>

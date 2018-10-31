@@ -4,39 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/NightBackround"
+    android:background="@drawable/background1"
     tools:context=".WakeUpFrame"
     tools:layout_editor_absoluteY="81dp">
-
-    <Button
-        android:id="@+id/closeAlarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="193dp"
-        android:onClick="closeAlarm"
-        android:text="Close Alarm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeText"
-        app:layout_constraintVertical_bias="0.583" />
 
     <TextView
         android:id="@+id/timeText"
         android:layout_width="263dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="83dp"
+        android:layout_marginTop="168dp"
         android:fontFamily="@font/roboto_light"
         android:gravity="center"
         android:text="TIME"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/closeAlarm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swipe_btn"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        app:button_background="@drawable/shape_button"
+        app:button_bottom_padding="20dp"
+        app:button_image_disabled="@mipmap/ic_alarmoff"
+        app:button_image_enabled="@mipmap/ic_alarm"
+        app:button_image_height="60dp"
+        app:button_image_width="60dp"
+        app:button_left_padding="20dp"
+        app:button_right_padding="20dp"
+        app:button_top_padding="20dp"
+        app:has_activate_state="true"
+        app:initial_state="disabled"
+        app:inner_text="SWIPE"
+        app:inner_text_background="@drawable/shape_rounded"
+        app:inner_text_bottom_padding="7dp"
+        app:inner_text_color="@android:color/white"
+        app:inner_text_size="22sp"
+        app:inner_text_top_padding="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
 </android.support.constraint.ConstraintLayout>

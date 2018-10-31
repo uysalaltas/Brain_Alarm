@@ -33,7 +33,8 @@
 
         <receiver android:name=".AlarmReceiver" />
 
-        <activity android:name=".WakeUpFrame" />
+        <activity android:name=".WakeUpFrame"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <provider
             android:name=".data.AlarmProvider"
