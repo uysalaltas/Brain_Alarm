@@ -35,7 +35,6 @@ public class WakeUpFrame extends AppCompatActivity {
                 moveTaskToBack(true);
             }
         });
-
     }
 
 }
